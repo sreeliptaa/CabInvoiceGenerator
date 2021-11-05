@@ -1,12 +1,21 @@
 package com.bridgelabz;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class InvoiceServiceTest {
+
+    InvoiceGenerator invoiceGenerator = null;
+
+    @BeforeEach
+    public void setUp() {
+        invoiceGenerator = new InvoiceGenerator();
+    }
+
     @Test
     void givenDistanceAndTime_ShouldReturnTotalFare() {
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         double distance = 2.0;
         int time = 5;
         double fare = invoiceGenerator.calculateFare(distance, time);
@@ -15,7 +24,6 @@ public class InvoiceServiceTest {
 
     @Test
     void givenLessDistanceAndTime_ShouldReturnMinimumFare() {
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         double distance = 0.1;
         int time = 1;
         double fare = invoiceGenerator.calculateFare(distance, time);
@@ -24,7 +32,6 @@ public class InvoiceServiceTest {
 
     @Test
     public void givenMultipleRides_ShouldReturnTotalFare() {
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         Ride[] rides = {new Ride(2.0, 5),
                 new Ride(0.1, 1)
         };
