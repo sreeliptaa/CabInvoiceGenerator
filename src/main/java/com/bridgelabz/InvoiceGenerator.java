@@ -25,16 +25,16 @@ public class InvoiceGenerator {
     }
 
     /**
-     * Purpose : To calculate total fare for multiple rides
+     * Purpose : To calculate total fare for multiple rides for enhanced invoice
      *
      * @param rides : This parameter takes multiple rides
-     * @return  total fare of all rides.
+     * @return total fare of rides and length of ride
      */
-    public double calculateFare(Ride[] rides) {
+    public InvoiceSummary calculateFare(Ride[] rides) {
         double totalFare = 0;
         for (Ride ride : rides) {
             totalFare += this.calculateFare(ride.distance, ride.time);
         }
-        return totalFare;
+        return new InvoiceSummary(rides.length, totalFare);
     }
 }
