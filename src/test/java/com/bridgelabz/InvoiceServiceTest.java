@@ -33,11 +33,11 @@ public class InvoiceServiceTest {
     @Test
     public void givenMultipleRides_ShouldReturnInvoiceSummary() {
         Ride[] rides = {
-                new Ride(2.0, 5),
-                new Ride(0.1, 1),
+                new Ride(CabRide.NORMAL, 2.0, 5),
+                new Ride(CabRide.PREMIUM, 0.1, 1),
         };
         InvoiceSummary actualSummary = invoiceService.calculateFare(rides);
-        InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
+        InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 45.0);
         Assertions.assertEquals(expectedInvoiceSummary, actualSummary);
     }
 
@@ -45,12 +45,12 @@ public class InvoiceServiceTest {
     public void givenUserIdAndRides_ShouldReturnInvoiceSummary() {
         String userId = "xyz.com";
         Ride[] rides = {
-                new Ride(2.0, 5),
-                new Ride(0.1, 1)
+                new Ride(CabRide.NORMAL, 2.0, 5),
+                new Ride(CabRide.PREMIUM, 0.1, 1)
         };
         invoiceService.addRides(userId, rides);
         InvoiceSummary actualSummary = invoiceService.getInvoiceSummary(userId);
-        InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
+        InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 45.0);
         Assertions.assertEquals(expectedInvoiceSummary, actualSummary);
     }
 
