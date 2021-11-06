@@ -7,10 +7,15 @@ package com.bridgelabz;
  * @since 2021-11-04
  */
 
-public class InvoiceGenerator {
+public class InvoiceService {
     private static final int COST_PER_TIME = 1;
     private static final double MINIMUM_COST_PER_KILOMETER = 10.0;
     private static final double MINIMUM_FARE = 5.0;
+    private RideRepository rideRepository;
+
+    public InvoiceService() {
+        this.rideRepository = new RideRepository();
+    }
 
     /**
      * Purpose : To calculate the minimum fare
@@ -36,5 +41,27 @@ public class InvoiceGenerator {
             totalFare += this.calculateFare(ride.distance, ride.time);
         }
         return new InvoiceSummary(rides.length, totalFare);
+    }
+
+    /**
+     * purpose : To get the enhanced invoice summary based on userID
+     *
+     * @param userId : takes userId as parameter
+     * @return the fare of rides based on userId
+     */
+
+    public InvoiceSummary getInvoiceSummary(String userId) {
+        return this.calculateFare(rideRepository.getRides(userId));
+    }
+
+    /**
+     * Purpose : To initialize the enhanced ride details by using userId
+     *
+     * @param userId : takes userId as first parameter
+     * @param rides  : takes multiple rides as second parameter
+     */
+
+    public void addRides(String userId, Ride[] rides) {
+        rideRepository.addRides(userId, rides);
     }
 }
